@@ -13,6 +13,9 @@ public class Main {
         System.out.println("Esto es una prueba.");
         System.out.println("Esta es la prueba hecha desde VisualStudio");
         System.out.println("Jimeno miamor");
+        System.out.println("Tae miamor");
+        System.out.println("PRUEBA :)");
+        System.out.println("PRUEBA 2 :)");
     }
     
 }
