@@ -1,8 +1,6 @@
 package eda2_proyecto2_eq6_g5;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.LinkedTransferQueue;
 
 // Nava Alberto Vanessa 
 
@@ -11,20 +9,10 @@ import java.util.concurrent.LinkedTransferQueue;
 
 public class Heap {
 
-    List list = new ArrayList<Integer>(); 
+    ArrayList<Integer> list = new ArrayList<Integer>();
     int heapSize;
 
     public Heap(){
-
-        System.out.println("Heap :)");
-        System.out.println("Aquí va el heap");
-    
-        /*
-        *   Aqui va todo el código del heap ;)
-        *   Sacatelas
-        */ 
-
-        System.out.println("La ultima prueba");
 
     }
 
@@ -34,27 +22,44 @@ public class Heap {
         b=t;
     }
 
-    void Heapify(int list, int i,int size){
+    void Heapify(ArrayList<Integer> list, int i,int size){
         int l=2*i+1;
         int r=2*i+2;
-        int largest;
-        if(l<heapSize&&list[l]>list[i])
+        int largest=0;
+        if( l < heapSize && list.get(l) > list.get(i))
             largest=r;
-        if(r<=heapSize&&list[r]>list[largest])
+        if( r <= heapSize && list.get(r) > list.get(largest))
             largest=r;
         if(largest!=i){
-            swap(list[i],list[largest]);
+            swap(list.get(i) , list.get(largest));
             Heapify(list, largest,size);
         }
     }
 
-    void ConstruyeHeap(List<Integer> list, int size){
+    void ConstruyeHeap(ArrayList<Integer> list, int tam){
         int i; 
-        heapSize= size-1;
-        for(i=(size-1)/2;i>=0;i--){
-            Heapify(list,i,size);
+        heapSize= tam-1;
+        for(i=((tam-1)/2) ;i>=0 ;i--){
+            Heapify(list,i,tam);
+            System.out.println("El heap esta construido ;)");
         }
     }
+
+    void ImprimeArray(ArrayList<Integer> list,int size){
+        int i;
+        for ( i=0 ; i < size; i++){
+            System.out.println(" "+list.get(i));
+        }
+    }
+
+    void ImprimeSubArray(ArrayList<Integer> list, int low, int high){
+        int i;
+        
+        for (i=low; i<=high; i++){
+            System.out.println(" "+ list.get(i));
+        }
+    }
+
 
 }
 
