@@ -12,6 +12,7 @@ import java.util.concurrent.LinkedTransferQueue;
 public class Heap {
 
     List list = new ArrayList<Integer>(); 
+    int heapSize;
 
     public Heap(){
 
@@ -27,13 +28,13 @@ public class Heap {
 
     }
 
-    void ConstruyeHeap(list){
-        heapSize= size-1;
-        for(i=(size-1)/2;i>=0;i--){
-            Heapify(list,size);
-        }
+    void swap(int a,int b){
+        int t;
+        t=a;
+        b=t;
     }
-    void Heapify(int list, int i){
+
+    void Heapify(int list, int i,int size){
         int l=2*i+1;
         int r=2*i+2;
         int largest;
@@ -43,7 +44,15 @@ public class Heap {
             largest=r;
         if(largest!=i){
             swap(list[i],list[largest]);
-            Heapify(list, largest,sizes);
+            Heapify(list, largest,size);
+        }
+    }
+
+    void ConstruyeHeap(List<Integer> list, int size){
+        int i; 
+        heapSize= size-1;
+        for(i=(size-1)/2;i>=0;i--){
+            Heapify(list,i,size);
         }
     }
 
