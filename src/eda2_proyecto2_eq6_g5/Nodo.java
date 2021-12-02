@@ -6,7 +6,7 @@ package eda2_proyecto2_eq6_g5;
  */
 public class Nodo {
     ///******Atributos******
-    int valor;
+    int valor, altura;
     Nodo izq = null;
     Nodo der = null;
     
@@ -21,6 +21,7 @@ public class Nodo {
         valor=data;
         izq = lt;
         der = rt;
+        altura = 1;
     }
     
     public Nodo(Nodo cpy){
