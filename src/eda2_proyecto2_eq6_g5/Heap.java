@@ -23,15 +23,18 @@ public class Heap {
     }
 
     void Heapify(ArrayList<Integer> list, int i,int size){
-        int l=2*i+1;
-        int r=2*i+2;
-        int largest=0;
-        if( l < heapSize && list.get(l) > list.get(i))
-            largest=r;
+        int l = 2 * (i+1);
+        int r = 2 * (i+2);
+        int largest;
+        if( l <= heapSize && list.get(l) > list.get(i))
+            largest = l;
+        else 
+            largest = i;
         if( r <= heapSize && list.get(r) > list.get(largest))
-            largest=r;
-        if(largest!=i){
+            largest = r;
+        if(largest != i){
             swap(list.get(i) , list.get(largest));
+            ImprimeArray(list, size);
             Heapify(list, largest,size);
         }
     }
@@ -39,10 +42,10 @@ public class Heap {
     void ConstruyeHeap(ArrayList<Integer> list, int tam){
         int i; 
         heapSize= tam-1;
-        for(i=((tam-1)/2) ;i>=0 ;i--){
+        for(i=((tam-1)/2) ; i>=0 ;i--){
             Heapify(list,i,tam);
-            System.out.println("El heap esta construido ;)");
         }
+        System.out.println("El heap esta construido ;)");
     }
 
     void ImprimeArray(ArrayList<Integer> list,int size){
