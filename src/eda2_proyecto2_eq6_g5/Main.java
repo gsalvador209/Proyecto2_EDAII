@@ -64,15 +64,14 @@ public class Main {
        
         exp.generarArbol("((8+3)+(4-3))/(2-5)");
         exp.inOrden(exp.root);
-        System.out.println();
-        exp.printPolix();
+        System.out.println('\n' + exp.getPolish());
+        System.out.println("El resultado es: " + exp.solveTree());
         
-        //exp.clean();
         
         exp.generarArbol("((2+5)-3/(5+8))*2");
         exp.inOrden(exp.root);
-        System.out.println();
-        exp.printPolix();
+        System.out.println('\n'+exp.getPolish());
+        System.out.println("El resultado es: " + exp.solveTree());
         
         
     }
