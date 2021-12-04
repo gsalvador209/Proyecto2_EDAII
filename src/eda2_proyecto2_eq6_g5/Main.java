@@ -74,8 +74,9 @@ public class Main {
                             continue;
                         if(opc == 1){                                           //Ingresar expresión
                             expresión = arit.getExpresion();
-                        }else if(opc==2){                                       //Mostrar arbol
                             exp.generarArbol(expresión);
+                        }else if(opc==2){                                       //Mostrar arbol
+                            
                             System.out.print("El arbol recorrido en BFS es ");
                             exp.BFS(true);
                             System.out.println();
