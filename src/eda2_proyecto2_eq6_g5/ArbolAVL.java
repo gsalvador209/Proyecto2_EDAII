@@ -10,49 +10,36 @@ package eda2_proyecto2_eq6_g5;
  * crear y realizar ciertas operaciones con árboles AVL
  * @author Yaxca
  */
-public class ArbolAVL {
-    
-    public Nodo raiz;
-    
-    public ArbolAVL(){
-        raiz=null;
-    }
-    public ArbolAVL(Nodo root){
-        raiz=root;
-    }
+public class ArbolAVL extends ArbolBin{
     
     /**
-     * Obtiene la altura del nodo
-     * Puede ser 1, 0 o -1
-     * @param elNodo objeto del tipo Nodo
-     * @return altura del nodo
+     * Obtiene la altura maxima entre 
+     * dos nodos diferentes
+     * @param Izq altura del Nodo hijo izquierdo
+     * @param Der altura del Nodo hijo derecho
+     * @return la altura maxima entre d
      */
-    public int getAltura(Nodo elNodo){
-        if( elNodo == null ){
-            return 0;
-        }
-        return elNodo.altura;
-    }
-    
-    public int getDiferencia(int alturaUno, int alturaDos){
-        int altura;    
+    public int getMaximo(int Izq, int Der){
+        int maximo;
         //obtener altura máxima
-        
-        return 1; //devolver esa altura
+        if (Izq > Der) {
+            maximo = Izq;
+        } else {
+            maximo = Der;
+        }
+        return maximo; //devolver esa altura
     }
     
-    /**
-     * Obtiene la función equilibrio del Nodo
-     * @param padre objeto del tipo Nodo
-     * @return valor entero con la nueva altura para padre
-     */
-    public int equilibrio(Nodo padre){
-        int equilibrio;
-        if(padre==null)
-            return 0;
-        else
-            equilibrio = getAltura(padre.izq) - getAltura(padre.der); 
-        return equilibrio;
+    //TO-DO
+    @Override
+    public void delete(Nodo unNodo){
+        Nodo padre = padreDe(root,unNodo);
+        if(padre.izq!=null){
+            if(padre.izq.valor==unNodo.valor)
+                padre.izq = null;
+        }else{
+            padre.der = null;
+        }
     }
  
     /**
@@ -61,14 +48,12 @@ public class ArbolAVL {
      * @param hijo Nodo agregado por el usuario
      * @param valorHijo valor del nuevo nodo
      */
+    @Override
     public void add(Nodo padre, Nodo hijo , int valorHijo){       
-        Nodo nodoNuevo;  
-        
             //inserción normal
         if(padre.valor>valorHijo){
             if(padre.izq == null){
                 padre.izq = new Nodo(hijo.valor);
-                nodoNuevo= padre.izq;
             }
             else{
                 add(padre.izq,hijo,valorHijo);
@@ -77,7 +62,6 @@ public class ArbolAVL {
         if(padre.valor<valorHijo){
             if(padre.der == null){
                 padre.der = new Nodo(hijo.valor);
-                nodoNuevo = padre.der;
             } 
             else{
                 add(padre.der,hijo,valorHijo);
@@ -91,37 +75,20 @@ public class ArbolAVL {
         padre.altura = 1 ;//+ equilibrio; 
             
             //equilibrio del padre
-        int equilibrio = equilibrio(padre);
-        //balancea(padre,
-            //balanceando árbol
-        if(equilibrio >1 && valorHijo < padre.izq.valor)
-            /*padre = rotaDerecha(padre);*/
-            
-        if(equilibrio < -1 && valorHijo > padre.der.valor)
-            /*padre = rotaIzquierda(padre)*/;
-        
-        if(equilibrio > 1 && valorHijo > padre.izq.valor)
-            /*padre.izq = rotaIzquierda(padre)
-            raiz = rotaDerecha(padre)*/
-            
-        if(equilibrio < -1 && valorHijo<padre.der.valor)
-            /*padre.der = rotaDerecha(padre);
-            raiz=rotaIzquierda(padre)*/valorHijo=1;
-         
+        balancea(padre,valorHijo); 
     }
     
     //funcion balancea
     public void balancea(Nodo padre, int valorHijo){
-        int equilibrio = equilibrio(padre);
+        int equilibrio = padre.izq.altura - padre.der.altura;
+        
         if(equilibrio >1 && valorHijo < padre.izq.valor)
-            /*raiz = rotaDerecha(padre);*/
+            padre = rotaDerecha(padre);
             
         if(equilibrio < -1 && valorHijo > padre.der.valor)
-            /*raiz = rotaIzquierda(padre)*/;
+            padre = rotaIzquierda(padre);
         
-        if(equilibrio < -1 && valorHijo<padre.der.valor)
-            /*padre.der = rotaIzquierda(padre);*/valorHijo=1;
-        
+        //TO DO
         if(equilibrio > 1 && valorHijo > padre.izq.valor)
             /*padre.izq = rotaDerecha(padre)*/
             
@@ -129,28 +96,40 @@ public class ArbolAVL {
             /*padre.der = rotaIzquierda(padre);*/valorHijo=1;
     }
     
-    //funcion rota izquierda
+    /**
+     * Sirve para rotar a la izquierda un árbol
+     * @param unNodo el Nodo padre a balancear
+     * @return un objeto de tipo Nodo que será el nuevo padre
+     */
     public Nodo rotaIzquierda(Nodo unNodo){
         Nodo nuevaRaiz = unNodo.der;
-        Nodo izquierda = unNodo.izq;
+        Nodo otroNodo = nuevaRaiz.izq;
         
         nuevaRaiz.izq = unNodo;
-        unNodo.der = izquierda;
+        unNodo.der = otroNodo;
         
         //actualiza alturas
+        unNodo.altura= 1+ getMaximo(unNodo.izq.altura, unNodo.der.altura);
+        nuevaRaiz.altura = 1+ getMaximo(nuevaRaiz.izq.altura, nuevaRaiz.der.altura);
         
         return nuevaRaiz;
     }
-    
-    //funcion rota derecha
+
+    /**
+     * Sirve para rotar a la derecha un árbol
+     * @param unNodo el Nodo padre a balancear
+     * @return un objeto de tipo Nodo que será el nuevo padre
+     */
     public Nodo rotaDerecha(Nodo unNodo){
         Nodo nuevaRaiz = unNodo.izq;
-        Nodo izquierda = unNodo.der;
+        Nodo otroNodo = nuevaRaiz.der;
         
         nuevaRaiz.der = unNodo;
-        unNodo.izq = izquierda;
+        unNodo.izq = otroNodo;
         
         //actualiza alturas
+        unNodo.altura = getMaximo(unNodo.izq.altura, unNodo.der.altura);
+        nuevaRaiz.altura = getMaximo(nuevaRaiz.izq.altura, nuevaRaiz.der.altura);
         
         return nuevaRaiz;
     }
