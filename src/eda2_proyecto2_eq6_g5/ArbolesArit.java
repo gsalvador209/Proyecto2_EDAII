@@ -37,7 +37,7 @@ public class ArbolesArit extends ArbolBin{
         while(i<expresion.length()){
             
             next = expresion.charAt(i);
-            System.out.println(next);
+            //System.out.println(next);
             if(isNumber(next)){
                 //getHoleNumber(expresion,i,temp);                              //Inutilizable por la notación polaca
                 //b = toNumber(temp);
@@ -64,7 +64,7 @@ public class ArbolesArit extends ArbolBin{
             else {
                 while(!operadores.isEmpty()){
                     if(firstIsHigherOrEquals(operadores.peek(),next)){
-                        System.out.println(operadores.peek() + " es msyor que " + next);
+                        //System.out.println(operadores.peek() + " es msyor que " + next);
                         AssembleNode(operadores.pop());
                     }else
                         break;
