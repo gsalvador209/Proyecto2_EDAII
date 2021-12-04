@@ -167,7 +167,7 @@ public class ArbolBin {
     }
     
     public void preOrden(Nodo nodo){
-        System.out.print((char)nodo.valor + " ");
+        nodo.print();
         if(nodo.izq != null)
             preOrden(nodo.izq);
         if(nodo.der != null)
@@ -176,9 +176,10 @@ public class ArbolBin {
      
     }
     public void inOrden(Nodo nodo){
+        
         if(nodo.izq != null)
             inOrden(nodo.izq);
-        System.out.print((char)nodo.valor + " ");
+        nodo.print();
         if(nodo.der != null)
            inOrden(nodo.der);
         
@@ -189,7 +190,7 @@ public class ArbolBin {
             posOrden(nodo.izq);
         if(nodo.der != null)
            posOrden(nodo.der);
-        System.out.print((char)nodo.valor + " ");
+        nodo.print();
      
     }
 

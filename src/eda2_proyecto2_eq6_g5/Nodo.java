@@ -7,6 +7,7 @@ package eda2_proyecto2_eq6_g5;
 public class Nodo {
     ///******Atributos******
     int valor, altura;
+    char c;
     Nodo izq = null;
     Nodo der = null;
     
@@ -21,6 +22,7 @@ public class Nodo {
      */
     public Nodo(int data){                  //Crea un nodo con un valor particular y sin hijos
         this(data,null,null);
+        c = ' ';
     }
     
     /**
@@ -35,6 +37,16 @@ public class Nodo {
         der = rt;
         altura = 1;
     }
+    
+    /**
+     * Crea un nodo con character
+     * @param c el caracter que se desea agregar al nodo
+     */
+    public Nodo(char c){
+        this.c = c;
+        izq = der = null;
+    }
+    
     
     /**
      * Reescribe el nodo
@@ -79,9 +91,23 @@ public class Nodo {
      */
     public void print(){
         if(this != null){
-            System.out.println("El nodo es " + valor);
-            
+            if (c == ' ') 
+               System.out.print(valor);
+            else 
+               System.out.print(c);
         }else{
+            System.out.println(" ");
+        }
+        
+    }
+    
+    public void printConHijos(){
+        if(this != null){
+            izq.print();
+            this.print();
+            der.print();
+            System.out.println();
+        } else {
             System.out.println("El nodo no está definido.");
         }
         
