@@ -33,9 +33,11 @@ public class ArbolesArit extends ArbolBin{
         char next;
         int i=0;
         int b;
-        List<Character> temp = new ArrayList();
+        //List<Character> temp = new ArrayList();
         while(i<expresion.length()){
+            
             next = expresion.charAt(i);
+            System.out.println(next);
             if(isNumber(next)){
                 //getHoleNumber(expresion,i,temp);                              //Inutilizable por la notación polaca
                 //b = toNumber(temp);
@@ -57,13 +59,15 @@ public class ArbolesArit extends ArbolBin{
                        break;
                    }
                 } 
-            }else if(firstIsHigherOrEquals(next,operadores.peek()))
+            }else if(firstIsLess(operadores.peek(),next)) //firstIsHigherOrEquals(next,operadores.peek())
                 operadores.push(next);
             else {
                 while(!operadores.isEmpty()){
                     if(firstIsHigherOrEquals(operadores.peek(),next)){
+                        System.out.println(operadores.peek() + " es msyor que " + next);
                         AssembleNode(operadores.pop());
-                    }
+                    }else
+                        break;
                 }
                 operadores.add(next);
             }
@@ -81,6 +85,13 @@ public class ArbolesArit extends ArbolBin{
         a = hierarchy(m);
         b = hierarchy(n);
         return a>=b;
+    }
+    
+    private boolean firstIsLess(char m, char n){
+        int a,b;
+        a = hierarchy (m);
+        b = hierarchy(n);
+        return a<b; 
     }
     
     private boolean isNumber(char m){                                           //Devuelve verdadero si m es un número y falso de lo contrario
