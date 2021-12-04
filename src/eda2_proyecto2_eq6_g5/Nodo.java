@@ -33,7 +33,7 @@ public class Nodo {
         valor=data;
         izq = lt;
         der = rt;
-        altura = 1;
+        altura = 0;
     }
     
     /**
