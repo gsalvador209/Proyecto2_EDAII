@@ -11,7 +11,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        
+        ArbolesArit exp = new ArbolesArit();
+/*
         //Pruebas de heap 
         Heap heap = new Heap();
         ArrayList<Integer> datos = new ArrayList<Integer>();
@@ -31,6 +33,7 @@ public class Main {
         datos.add(18);
         datos.add(12);
         datos.add(7);*/
+/*
         datos.add(10);
         datos.add(11);
         datos.add(19);
@@ -54,9 +57,23 @@ public class Main {
 
         /*System.out.println("Imprimo sub-arreglo: ");
         heap.ImprimeSubArray(datos, 0, tam-1);*/
-
+        /*
+               
         System.out.println("La ultima prueba");
-
+        */
+       
+        exp.generarArbol("((8+3)+(4-3))/(2-5)");
+        exp.inOrden(exp.root);
+        System.out.println();
+        exp.printPolix();
+        
+        //exp.clean();
+        
+        exp.generarArbol("((2+5)-3/(5+8))*2");
+        exp.inOrden(exp.root);
+        System.out.println();
+        exp.printPolix();
+        
         
     }
     
