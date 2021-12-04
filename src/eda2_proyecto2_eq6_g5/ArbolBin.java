@@ -183,8 +183,19 @@ public class ArbolBin {
         if(nodo.der != null)
            inOrden(nodo.der);
         
-     
     }
+    
+    public void posOrden(Nodo nodo, List<Character> text){
+        if(nodo.izq != null)
+            posOrden(nodo.izq,text);
+        if(nodo.der != null)
+           posOrden(nodo.der,text);
+        if(nodo.c == ' ')
+            text.add((char)(nodo.valor + '0'));
+        else
+            text.add(nodo.c);
+    }
+    
     public void posOrden(Nodo nodo){
         if(nodo.izq != null)
             posOrden(nodo.izq);
