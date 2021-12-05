@@ -78,15 +78,9 @@ public class Main {
                             }                     
                         }else if(opc==4){
                             //Mostrar
-                            if(arbolAVL.root == null){
-                                System.out.println("No hay claves para mostrar");
-                                System.out.println(); 
-                            } 
-                            else{
-                                System.out.print("El arbol recorrido en BFS es ");
-                                arbolAVL.BFS(true);
-                                System.out.println();     
-                            }   
+                            System.out.print("El arbol recorrido en BFS es ");
+                            arbolAVL.BFS(true);
+                            System.out.println();                                
                         }else{
                             //Regresar al menu principal
                             break;
