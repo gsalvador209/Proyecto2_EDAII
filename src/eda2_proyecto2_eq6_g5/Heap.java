@@ -74,7 +74,7 @@ public class Heap{
                 return heap[leftChild]>heap[rightChild]?leftChild:rightChild;
     }
      
-    public void ImprimeHeap()
+    public void ImprimeHeap() //Imprime el heap 
         {
             System.out.print("nHeap = ");
             for (int i = 0; i < heapSize; i++)
@@ -82,7 +82,7 @@ public class Heap{
             System.out.println();
         }
     
-     public int EncuentraGrandulon(){
+     public int EncuentraGrandulon(){ //Encuentra el valor máxímo del heap, en este caso es el primer elemento
          if(isEmpty())
              throw new NoSuchElementException("Heap is empty.");
          return heap[0];
