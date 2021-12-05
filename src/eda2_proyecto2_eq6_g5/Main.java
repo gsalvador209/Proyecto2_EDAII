@@ -1,7 +1,8 @@
 package eda2_proyecto2_eq6_g5;
 
 /**
- *Vane-)
+ * @author Alexa Quero
+ * @author Vanessa Nava
  * @author Salvador Chavez
  */
 public class Main {
@@ -22,9 +23,10 @@ public class Main {
         //***********ÁRBOLES**********
         ArbolesArit exp = new ArbolesArit();
         
-      
+        Heap HeapBin = new Heap(100);
         //**********CÓDIGO PRINCIPAL******
-        int opc;
+        int opc,temp;
+        Nodo nodo;
         String expresión = "";
         while(true){
             raiz.imprimirMenu();
@@ -54,18 +56,35 @@ public class Main {
                     break;
                 case 2:
                     //HEAP
+                    nodo = new Nodo();
                     while(true){
                         heap.imprimirMenu();
-                        opc = heap.solicitarOpcion("Primero debes crear el arbol", false, "1,4"); //TO-DO INGRESAR CONDICIÓN
+                        opc = heap.solicitarOpcion("Primero debes crear el arbol", true, "1,4"); //TO-DO INGRESAR CONDICIÓN
                                                                                                    //Por ejemplo root != null; 
                         if(opc== -1)
                             continue;
                         if(opc == 1){
+
                             //Agregar clave
+                            System.out.println("- - Agregar clave :) - -\n");
+        
+                            System.out.println("Ingresa el nodo");
+                            temp=nodo.pedirValor();
+                            HeapBin.InsertarElem(temp);
+                            HeapBin.ImprimeHeap();
+
                         }else if(opc==2){
+
                             //Eliminar
+                            System.out.println("- - Eliminar clave :) - -\n");
+                            HeapBin.FunEliminar();
+
                         }else if(opc==3){
+
                             //Mostrar
+                            System.out.println("- - Mostrar heap :) - -\n");
+                            HeapBin.ImprimeHeap();
+
                         }else {
                             //Regresar al menu principal
                             break;
