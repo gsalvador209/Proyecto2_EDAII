@@ -1,68 +1,93 @@
 package eda2_proyecto2_eq6_g5;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 // Nava Alberto Vanessa 
 
 // en esta clase esta implementado el heap donde:
 // se agregauna clave, se elimina una clave y muestra el árbol
 
-public class Heap {
+public class Heap{
 
-    ArrayList<Integer> list = new ArrayList<Integer>();
-    int heapSize;
-
-    public Heap(){
-
+    //  Atributos   //
+    private int[] heap;
+    private int heapSize;
+     
+    //  Constructor //
+    public Heap(int tam){
+        heapSize = 0;
+        heap = new int[ tam+1];
+        Arrays.fill(heap, -1);
     }
-
-    void swap(int a,int b){
-        int t;
-        t=a;
-        b=t;
+     
+    //  Métodos   //
+    public boolean isEmpty(){
+        return heapSize==0; // Se revisa que no este vacío
     }
-
-    void Heapify(ArrayList<Integer> list, int i,int size){
-        int l = 2 * (i+1);
-        int r = 2 * (i+2);
-        int largest;
-        if( l <= heapSize && list.get(l) > list.get(i))
-            largest = l;
-        else 
-            largest = i;
-        if( r <= heapSize && list.get(r) > list.get(largest))
-            largest = r;
-        if(largest != i){
-            swap(list.get(i) , list.get(largest));
-            ImprimeArray(list, size);
-            Heapify(list, largest,size);
+     
+    public boolean isFull(){ 
+        return heapSize == heap.length; //Se revisa que no este lleno
+    }
+     
+     
+    private int Padre(int i){
+        return (i-1)/2;
+    }
+     
+    private int Hijo(int i,int k){
+        return 2*i  +k;
+    }
+     
+    public void insert(int x){
+        if(isFull())
+            throw new NoSuchElementException("No se pueden insertar más datos al heap, esta lleno :(");
+        heap[heapSize++] = x;
+        HeapifyArriba(heapSize-1);
+    }
+     
+    public int Elimina(int x){
+        if(isEmpty())
+            throw new NoSuchElementException("No puedes eliminar ningún elemento porque esta vacío :0");
+        int key = heap[x];
+        heap[x] = heap[heapSize -1];
+        heapSize--;
+        HeapifyAbajo(x);
+        return key;
+    }
+ 
+    private void HeapifyArriba(int i) {
+        int temp = heap[i];
+        while(i>0 && temp > heap[Padre(i)]){
+            heap[i] = heap[Padre(i)];
+            i = Padre(i);
         }
+        heap[i] = temp;
     }
-
-    void ConstruyeHeap(ArrayList<Integer> list, int tam){
-        int i; 
-        heapSize= tam-1;
-        for(i=((tam-1)/2) ; i>=0 ;i--){
-            Heapify(list,i,tam);
+     
+    private void HeapifyAbajo(int i){
+        int child;
+        int temp = heap[i];
+        while(Hijo(i, 1) < heapSize){
+            child = maxChild(i);
+            if(temp < heap[child]){ heap[i] = heap[child]; }else break; i = child; } heap[i] = temp; } private int maxChild(int i) { int leftChild = Hijo(i, 1); int rightChild = Hijo(i, 2);
+                return heap[leftChild]>heap[rightChild]?leftChild:rightChild;
+    }
+     
+    public void ImprimeHeap()
+        {
+            System.out.print("nHeap = ");
+            for (int i = 0; i < heapSize; i++)
+                System.out.print(heap[i] +" ");
+            System.out.println();
         }
-        System.out.println("El heap esta construido ;)");
-    }
-
-    void ImprimeArray(ArrayList<Integer> list,int size){
-        int i;
-        for ( i=0 ; i < size; i++){
-            System.out.println(" "+list.get(i));
-        }
-    }
-
-    void ImprimeSubArray(ArrayList<Integer> list, int low, int high){
-        int i;
-        
-        for (i=low; i<=high; i++){
-            System.out.println(" "+ list.get(i));
-        }
-    }
-
-
+    
+     public int EncuentraGrandulon(){
+         if(isEmpty())
+             throw new NoSuchElementException("Heap is empty.");
+         return heap[0];
+     }
+      
+     
 }
 
