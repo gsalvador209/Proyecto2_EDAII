@@ -9,7 +9,7 @@ package eda2_proyecto2_eq6_g5;
  * Esta clase contiene los métodos necesarios para 
  * crear y realizar ciertas operaciones con árboles AVL
  * Hereda a la clase ArbolBin
- * @author Yaxca
+ * @author Yaxca Alexa Quero Bautista
  */
 public class ArbolAVL extends ArbolBin{
     
@@ -160,24 +160,38 @@ public class ArbolAVL extends ArbolBin{
         return nuevaRaiz;
     }
     
-    
+    /**
+     * Sirve para eliminar una clave del árbol
+     * Si no existe, regresa al mismo padre
+     * @param padre nodo padre del hijo a eliminar
+     * @param valorHijo
+     * @return
+     */
     public Nodo elimina(Nodo padre,int valorHijo){
-        //Nodo padre = padreDe(root, valorHijo);
+        Nodo buscaNodo = new Nodo(valorHijo);       
+        boolean existe=contains(buscaNodo);
+        //condición para saber si la clave a eliminar existe o no
+        if(existe==false){
+            System.out.println("La clave no se encuentra en el árbol");
+            return root;
+        }
         
         if(padre==null)
             return padre;
-        
         if(valorHijo < padre.valor)
-            root.izq = elimina(padre.izq, valorHijo);
-        
+            padre.izq = elimina(padre.izq, valorHijo);
         if(padre.izq!=null){
             if(padre.izq.valor==valorHijo)
                 padre.izq = null;
         }else{
             padre.der = null;
         }
+        //eliminacion de hojas y nodos intermedios
         
-        return padre;
+        
+        //balanceo final del árbol
+        Nodo nodoFinal = balancea(padre,valorHijo);
+        return nodoFinal; 
     }
   
 }
