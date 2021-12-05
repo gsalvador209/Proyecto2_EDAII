@@ -1,17 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eda2_proyecto2_eq6_g5;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * Esta clase contiene los métodos necesarios para 
  * crear y realizar ciertas operaciones con árboles AVL
  * Hereda a la clase ArbolBin
- * @author Yaxca
- */
+ * @author Yaxca Alexa Quero Bautista
+*/
 public class ArbolAVL extends ArbolBin{
+    
+    /**
+     * Busca el nodo con el valor que busca el usuario
+     * @param value Valor del nodo a buscar
+     * @return objeto de tipo Nodo del valor buscado
+     */
+    public Nodo getNodo(int value){
+        if (!this.contains(value)) {
+            System.err.println("Ese nodo no existe.");
+            return null;
+        } else {
+            Nodo r = root;
+            if (r.getValue() == value) {
+                return r;
+            }
+            Queue<Nodo> queue = new LinkedList();
+            if (r != null) {
+                queue.add(r);
+                while (!queue.isEmpty()) {
+                    r = (Nodo) queue.poll();
+                    if(r.getValue()==value)
+                        return r;
+                    if (r.izq != null) {
+                        queue.add(r.izq);
+                    }
+                    if (r.der != null) {
+                        queue.add(r.der);
+                    }
+                }
+            }
+            return null;
+        }    
+    }
     
     /**
      * Obtiene la altura del nodo, incluso
@@ -68,7 +100,6 @@ public class ArbolAVL extends ArbolBin{
      * @return nodo que será la nueva raíz del árbol
      */
     public Nodo agrega(Nodo padre, Nodo hijo , int valorHijo){       
-        
         //inserción normal
         if(padre == null)
             return hijo;
@@ -77,8 +108,7 @@ public class ArbolAVL extends ArbolBin{
         if(valorHijo > padre.valor)
             padre.der = agrega(padre.der,hijo,valorHijo);
                     
-
-        //equilibrio del padre y balanceo del árbol
+        //balanceo del árbol
         Nodo nodoFinal = balancea(padre,valorHijo);
         return nodoFinal;
     }
@@ -160,24 +190,81 @@ public class ArbolAVL extends ArbolBin{
         return nuevaRaiz;
     }
     
-    
-    public Nodo elimina(Nodo padre,int valorHijo){
-        //Nodo padre = padreDe(root, valorHijo);
-        
-        if(padre==null)
-            return padre;
-        
-        if(valorHijo < padre.valor)
-            root.izq = elimina(padre.izq, valorHijo);
-        
+    /**
+     * Sirve para eliminar una clave del árbol
+     * Si no existe, regresa al mismo padre
+     * @param hijo Nodo que se va a eliminar
+     */
+    @Override
+    public void delete(Nodo hijo){
+        hijo = swapMenorMasCercano(hijo);
+        hacerHoja(hijo);
+        Nodo padre = padreDe(root,hijo);
         if(padre.izq!=null){
-            if(padre.izq.valor==valorHijo)
+            if(padre.izq.getValue()==hijo.getValue()){
                 padre.izq = null;
+                return ;
+            }
+        }
+        padre.der = null;
+        balancea(padre,hijo.valor);
+    }
+    
+    /**
+     * Busca si el valor se encuentra en el valor
+     * @param n Valor entero que se busca
+     * @return varbiable booleana que dice si se encuentra
+     *         o no el valor buscado
+     */
+    public boolean contains(int n){
+        List<Integer> busqueda;
+        busqueda = this.BFS(false);
+        return busqueda.contains(n);
+    }
+    
+    private Nodo swapMenorMasCercano(Nodo n){
+        Nodo menorMasCercano = null;
+        int temp;
+        
+        if(n.izq != null){
+            menorMasCercano = encontrarMasDer(n.izq);
+        }else if(n.der != null){
+            menorMasCercano = encontrarMasIzq(n.der);
         }else{
-            padre.der = null;
+            //El nodo n ya es hoja
+            return n;
+        }
+        temp = n.getValue();
+        
+        Nodo padreMenor = padreDe(root,menorMasCercano);
+        
+        if(padreMenor == n){
+            if (padreMenor.izq == menorMasCercano) {
+                swap(n, menorMasCercano, 0);
+            } else {
+                swap(n, menorMasCercano, 1);
+            }
+            return n;
         }
         
-        return padre;
+        n.valor = menorMasCercano.getValue();
+        menorMasCercano.valor = temp;
+        return menorMasCercano;
     }
-  
+    
+    private Nodo encontrarMasDer(Nodo n){
+        if(n.der!=null)
+            n = encontrarMasDer(n.der);
+        else
+            return n;
+        return n;
+    }
+    
+    private Nodo encontrarMasIzq(Nodo n){
+        if(n.izq!=null)
+            n = encontrarMasIzq(n.izq);
+        else
+            return n;
+        return n;
+    }
 }
