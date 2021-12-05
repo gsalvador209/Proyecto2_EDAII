@@ -1,6 +1,5 @@
 package eda2_proyecto2_eq6_g5;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
