@@ -44,7 +44,6 @@ public class Main {
                         opc = avl.solicitarOpcion("Primero debes crear un árbol", arbolAVL.root!= null, "1,5"); 
                         if(opc== -1)
                             continue;                                                                            
-                       
                         if(opc == 1){
                             //Agregar clave
                             System.out.print("Ingresa el valor de la nueva clave:");
@@ -71,7 +70,7 @@ public class Main {
                         }else if(opc==3){
                             //Eliminar
                             if(arbolAVL.root == null){
-                                System.out.println("No hay claves para mostrar");
+                                System.out.println("No hay claves para eliminar");
                                 System.out.println(); 
                             } 
                             else{
@@ -106,10 +105,13 @@ public class Main {
                             continue;
                         if(opc == 1){
                             //Agregar clave
+                            
                         }else if(opc==2){
                             //Eliminar
+                            
                         }else if(opc==3){
-                            //Mostrar                   
+                            //Mostrar  
+                            
                         }else {
                             //Regresar al menu principal
                             break;
@@ -145,7 +147,6 @@ public class Main {
                     //Salir
                     return;
             }
-
         }  
     }
     
