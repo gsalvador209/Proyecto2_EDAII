@@ -36,7 +36,7 @@ public class ArbolBin {
     
     protected void visit(Nodo n){                      //Marca un nodo como visitado imprimiendo su valor
         if (n!=null)
-            System.out.print(n.valor+" ");
+            n.print();
     }	
     
     /**
@@ -186,14 +186,20 @@ public class ArbolBin {
     }
     
     public void posOrden(Nodo nodo, List<Character> text){
-        if(nodo.izq != null)
+        try{
+            if(nodo.izq != null)
             posOrden(nodo.izq,text);
-        if(nodo.der != null)
-           posOrden(nodo.der,text);
-        if(nodo.c == ' ')
-            text.add((char)(nodo.valor + '0'));
-        else
-            text.add(nodo.c);
+            if(nodo.der != null)
+            posOrden(nodo.der,text);
+            if(nodo.c == ' ')
+                text.add((char)(nodo.valor + '0'));
+            else
+                text.add(nodo.c);
+        }catch(NullPointerException f){
+        
+        }
+        
+        
     }
     
     public void posOrden(Nodo nodo){
