@@ -48,36 +48,34 @@ public class Main {
                             //Agregar clave
                             System.out.print("Ingresa el valor de la nueva clave:");
                             valorAVL = scan.nextInt();
-                            Nodo nuevoNodo = new Nodo(valorAVL); 
-                            arbolAVL.root= arbolAVL.agrega(arbolAVL.root, nuevoNodo, valorAVL);
+                            if(arbolAVL.contains(valorAVL)){
+                                System.err.println("Este valor ya está en el árbol");
+                            }else{
+                                Nodo nuevoNodo = new Nodo(valorAVL); 
+                                arbolAVL.root= arbolAVL.agrega(arbolAVL.root, nuevoNodo, valorAVL);
+                            }
                         }else if(opc==2){
                             //Buscar
-                            if(arbolAVL.root == null){
-                                System.out.println("No hay claves para buscar");
-                                System.out.println(); 
-                            } 
-                            else{
-                                System.out.print("Ingresa el valor a buscar:");
-                                valorAVL = scan.nextInt();
-                                Nodo buscaNodo = new Nodo(valorAVL);       
-                                boolean existe=arbolAVL.contains(buscaNodo);
-                                if(existe==true){
-                                    System.out.println("La clave "+valorAVL+" se encuentra en el árbol");
-                                }else{
-                                    System.out.println("La clave "+valorAVL+" no existe");
-                                }    
-                            }
+                            System.out.print("Ingresa el valor a buscar:");
+                            valorAVL = scan.nextInt();
+                            Nodo buscaNodo = new Nodo(valorAVL);       
+                            boolean existe=arbolAVL.contains(buscaNodo);
+                            if(existe==true){
+                                System.out.println("La clave "+valorAVL+" se encuentra en el árbol");
+                            }else{
+                                System.out.println("La clave "+valorAVL+" no existe");
+                            }      
                         }else if(opc==3){
                             //Eliminar
-                            if(arbolAVL.root == null){
-                                System.out.println("No hay claves para eliminar");
-                                System.out.println(); 
-                            } 
+                            System.out.print("Ingresa la clave a eliminar:");
+                            valorAVL = scan.nextInt();
+                            Nodo nodoEliminar = arbolAVL.getNodo(valorAVL);
+                            if(nodoEliminar==null)
+                                System.out.println("\nLa clave ingresada no existe para eliminarse");
                             else{
-                                System.out.print("Ingresa la clave a eliminar:");
-                                valorAVL = scan.nextInt();
-                                //arbolAVL.eliminar(arbolAVL.root,valorAVL);
-                            }
+                                arbolAVL.delete(nodoEliminar);
+                                System.out.println("\nClave eliminada con éxito:)\n");
+                            }                     
                         }else if(opc==4){
                             //Mostrar
                             if(arbolAVL.root == null){
