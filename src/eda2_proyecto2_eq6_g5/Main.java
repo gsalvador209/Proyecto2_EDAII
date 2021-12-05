@@ -2,12 +2,12 @@ package eda2_proyecto2_eq6_g5;
 
 import java.util.Scanner;
 
-/**
- * Esta clase contiene el menú principal del programa
- * con las opciones necesarias de los submenús
+/*
  * @author Salvador Chavez
  * @author Vanessa Nava
  * @author Yaxca Quero
+ * Esta clase contiene el menú principal del programa
+ * con las opciones necesarias de los submenú
  */
 public class Main {
 
@@ -15,15 +15,21 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        
+
+        //**********MENÚS************
         Menu raiz = new Menu("Árbol AVL,Heap,Árbol de Expresión Aritmética,Salir");
         Menu avl = new Menu("Agregar clave,Buscar un valor,Eliminar Clave,Mostrar Árbol,Regresar");
         Menu heap = new Menu("Agregar clave,Eliminar raíz,Mostrar Árbol,Regresar");
         Menu arit = new Menu("Ingresar expresión,Mostrar Árbol,Resolver,Regresar");
         
+        //***********ÁRBOLES**********
         ArbolesArit exp = new ArbolesArit();
         ArbolAVL arbolAVL = new ArbolAVL();
+        
+        //***********AUXILIARES***********
+        Scanner scan = new Scanner(System.in);
+      
+        //**********CÓDIGO PRINCIPAL******
         int opc;
         String expresión = "";
         while(true){
@@ -35,9 +41,9 @@ public class Main {
                     while(true){
                         int valorAVL;
                         avl.imprimirMenu();
-                        opc = avl.solicitarOpcion("Primero debes crear un árbol", arbolAVL.root!= null, "1,5"); //TO-DO INGRESAR CONDICIÓN
+                        opc = avl.solicitarOpcion("Primero debes crear un árbol", arbolAVL.root!= null, "1,5"); 
                         if(opc== -1)
-                            continue;                                                                         //Por ejemplo root != null;   
+                            continue;                                                                            
                        
                         if(opc == 1){
                             //Agregar clave
@@ -144,66 +150,49 @@ public class Main {
     }
     
 }
-      
-        
 /*
         //Pruebas de heap 
-        Heap heap = new Heap();
-        ArrayList<Integer> datos = new ArrayList<Integer>();
-        int tam;
+        Heap heap = new Heap(n);
         
-        datos.add(1);
-        datos.add(5);
-        datos.add(2);
-        datos.add(8);
-        datos.add(13);
-        /*datos.add(4);
-        datos.add(9);
-        datos.add(3);
-        datos.add(6);
-        datos.add(20);
-        datos.add(15);
-        datos.add(18);
-        datos.add(12);
-        datos.add(7);*/
-/*
-        datos.add(10);
-        datos.add(11);
-        datos.add(19);
-        datos.add(17);
-        datos.add(16);
-        datos.add(14);
+        Nodo n1 = new Nodo(3);
+        Tam++;
+        heap.insert(n1.valor);
 
-        System.out.println("Pruebas de Heap: ");
+        Nodo n2 = new Nodo(8);
+        Tam++;
+        heap.insert(n2.valor);
 
-        System.out.println("Heap :)");
-        System.out.println("Aquí va el heap");
+        Nodo n3 = new Nodo(10);
+        Tam++;
+        heap.insert(n3.valor);
         
-        tam=datos.size();
+        
+        heap.insert(8);
+        Tam++;
+        heap.insert(13);
+        Tam++;
+        heap.insert(10);
+        Tam++;
+        heap.insert(11);
+        Tam++;
+        heap.insert(19);
+        Tam++;
+        heap.insert(17);
+        Tam++;
+        heap.insert(16);
+        Tam++;
+        heap.insert(14);
+        Tam++;
+        
 
-        System.out.println("Imprimo arreglo antes de construir el heap: ");
-        heap.ImprimeArray(datos,tam);
+        System.out.println(Tam);
+        
 
-        heap.ConstruyeHeap(datos, tam);
-        System.out.println("Imprimo arreglo: ");
-        heap.ImprimeArray(datos,tam);
-
-        /*System.out.println("Imprimo sub-arreglo: ");
-        heap.ImprimeSubArray(datos, 0, tam-1);*/
-        /*
+        heap.ImprimeHeap();
+        heap.Elimina(1);
+        heap.ImprimeHeap();
+        heap.Elimina(8);
+        heap.ImprimeHeap();
+    
                
         System.out.println("La ultima prueba");
-        */
-        /*
-        exp.generarArbol("((8+3)+(4-3))/(2-5)");
-        exp.inOrden(exp.root);
-        System.out.println('\n' + exp.getPolish());
-        System.out.println("El resultado es: " + exp.solveTree());
-        
-        
-        exp.generarArbol("((2+5)-3/(5+8))*2");
-        exp.inOrden(exp.root);
-        System.out.println('\n'+exp.getPolish());
-        System.out.println("El resultado es: " + exp.solveTree());
-        */
-        

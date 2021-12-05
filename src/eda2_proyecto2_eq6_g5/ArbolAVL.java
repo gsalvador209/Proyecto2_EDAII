@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eda2_proyecto2_eq6_g5;
 
 /**
@@ -10,7 +5,7 @@ package eda2_proyecto2_eq6_g5;
  * crear y realizar ciertas operaciones con árboles AVL
  * Hereda a la clase ArbolBin
  * @author Yaxca Alexa Quero Bautista
- */
+*/
 public class ArbolAVL extends ArbolBin{
     
     /**
@@ -187,7 +182,6 @@ public class ArbolAVL extends ArbolBin{
             padre.der = null;
         }
         //eliminacion de hojas y nodos intermedios
-        
         
         //balanceo final del árbol
         Nodo nodoFinal = balancea(padre,valorHijo);
