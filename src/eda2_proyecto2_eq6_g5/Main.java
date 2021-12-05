@@ -1,6 +1,7 @@
 package eda2_proyecto2_eq6_g5;
+
 /**
- *
+ *Vane-)
  * @author Salvador Chavez
  */
 public class Main {
@@ -9,21 +10,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
 
-        //ArbolesArit exp = new ArbolesArit();
-        int Tam=0;
-        int n = 100;
         
-        //ArrayList<Integer> list = new ArrayList<>();
+        //**********MENÚS************
 
         Menu raiz = new Menu("Árbol AVL,Heap,Árbol de Expresión Aritmética,Salir");
         Menu avl = new Menu("Agregar clave,Buscar un valor,Eliminar Clave,Mostrar Árbol,Regresar");
         Menu heap = new Menu("Agregar clave,Eliminar raíz,Mostrar Árbol,Regresar");
         Menu arit = new Menu("Ingresar expresión,Mostrar Árbol,Resolver,Regresar");
         
+        //***********ÁRBOLES**********
         ArbolesArit exp = new ArbolesArit();
         
+      
+        //**********CÓDIGO PRINCIPAL******
         int opc;
         String expresión = "";
         while(true){
