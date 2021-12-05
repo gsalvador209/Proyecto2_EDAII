@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*
  * @author Salvador Chavez
  * @author Vanessa Nava
- * @author Yaxca Quero
+ * @author Yaxca Quero 
  * Esta clase contiene el menú principal del programa
  * con las opciones necesarias de los submenú
  */
