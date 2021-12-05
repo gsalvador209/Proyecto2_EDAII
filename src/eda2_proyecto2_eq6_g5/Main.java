@@ -1,7 +1,13 @@
 package eda2_proyecto2_eq6_g5;
+
+import java.util.Scanner;
+
 /**
- *
+ * Esta clase contiene el menú principal del programa
+ * con las opciones necesarias de los submenús
  * @author Salvador Chavez
+ * @author Vanessa Nava
+ * @author Yaxca Quero
  */
 public class Main {
 
@@ -9,6 +15,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         
         Menu raiz = new Menu("Árbol AVL,Heap,Árbol de Expresión Aritmética,Salir");
         Menu avl = new Menu("Agregar clave,Buscar un valor,Eliminar Clave,Mostrar Árbol,Regresar");
@@ -16,7 +23,7 @@ public class Main {
         Menu arit = new Menu("Ingresar expresión,Mostrar Árbol,Resolver,Regresar");
         
         ArbolesArit exp = new ArbolesArit();
-        
+        ArbolAVL arbolAVL = new ArbolAVL();
         int opc;
         String expresión = "";
         while(true){
@@ -26,19 +33,57 @@ public class Main {
                 case 1:
                     //AVL
                     while(true){
+                        int valorAVL;
                         avl.imprimirMenu();
-                        opc = avl.solicitarOpcion("Primero debes crear un árbol",false, "1,5"); //TO-DO INGRESAR CONDICIÓN
+                        opc = avl.solicitarOpcion("Primero debes crear un árbol", arbolAVL.root!= null, "1,5"); //TO-DO INGRESAR CONDICIÓN
                         if(opc== -1)
                             continue;                                                                         //Por ejemplo root != null;   
                        
                         if(opc == 1){
                             //Agregar clave
+                            System.out.print("Ingresa el valor de la nueva clave:");
+                            valorAVL = scan.nextInt();
+                            Nodo nuevoNodo = new Nodo(valorAVL); 
+                            arbolAVL.root= arbolAVL.agrega(arbolAVL.root, nuevoNodo, valorAVL);
                         }else if(opc==2){
                             //Buscar
+                            if(arbolAVL.root == null){
+                                System.out.println("No hay claves para buscar");
+                                System.out.println(); 
+                            } 
+                            else{
+                                System.out.print("Ingresa el valor a buscar:");
+                                valorAVL = scan.nextInt();
+                                Nodo buscaNodo = new Nodo(valorAVL);       
+                                boolean existe=arbolAVL.contains(buscaNodo);
+                                if(existe==true){
+                                    System.out.println("La clave "+valorAVL+" se encuentra en el árbol");
+                                }else{
+                                    System.out.println("La clave "+valorAVL+" no existe");
+                                }    
+                            }
                         }else if(opc==3){
                             //Eliminar
+                            if(arbolAVL.root == null){
+                                System.out.println("No hay claves para mostrar");
+                                System.out.println(); 
+                            } 
+                            else{
+                                System.out.print("Ingresa la clave a eliminar:");
+                                valorAVL = scan.nextInt();
+                                //arbolAVL.eliminar(arbolAVL.root,valorAVL);
+                            }
                         }else if(opc==4){
                             //Mostrar
+                            if(arbolAVL.root == null){
+                                System.out.println("No hay claves para mostrar");
+                                System.out.println(); 
+                            } 
+                            else{
+                                System.out.print("El arbol recorrido en BFS es ");
+                                arbolAVL.BFS(true);
+                                System.out.println();     
+                            }   
                         }else{
                             //Regresar al menu principal
                             break;
@@ -58,7 +103,7 @@ public class Main {
                         }else if(opc==2){
                             //Eliminar
                         }else if(opc==3){
-                            //Mostrar
+                            //Mostrar                   
                         }else {
                             //Regresar al menu principal
                             break;
