@@ -1,5 +1,7 @@
 package eda2_proyecto2_eq6_g5;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Edgar
@@ -111,6 +113,19 @@ public class Nodo {
             System.out.println("El nodo no está definido.");
         }
         
+    }
+
+    public int pedirValor(){ // Método que se utiliza para poder agregar los datos del nodo (utilizado en el heap)
+        Scanner sc = new Scanner(System.in);
+        int key;
+        while(true){
+            try{
+                key = Integer.parseInt(sc.nextLine());
+                return key;
+            }catch(Exception e){
+                System.err.println("Ingresa un número.");
+            } 
+        }
     }
    
 }
