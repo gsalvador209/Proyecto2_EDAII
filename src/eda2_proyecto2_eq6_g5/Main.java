@@ -19,7 +19,7 @@ public class Main {
 
         Menu raiz = new Menu("Árbol AVL,Heap,Árbol de Expresión Aritmética,Salir");
         Menu avl = new Menu("Agregar clave,Buscar un valor,Eliminar Clave,Mostrar Árbol,Regresar");
-        Menu heap = new Menu("Agregar clave,Eliminar raíz,Mostrar Árbol,Regresar");
+        Menu heap = new Menu("Agregar clave,Eliminar raíz,Mostrar Árbol,Buscar clave,Regresar");
         Menu arit = new Menu("Ingresar expresión,Mostrar Árbol,Resolver,Regresar");
         
         //***********ÁRBOLES**********
@@ -106,17 +106,20 @@ public class Main {
                             //Agregar clave
                             System.out.println("- - Agregar clave :) - -\n");
                             System.out.println("Ingresa el nodo");
-                            temp=nodo.pedirValor();
+                            temp=nodo.pedirValor(); // temp es la variable que almacena el valor ingresado del nodo 
                             HeapBin.InsertarElem(temp);
-                            HeapBin.ImprimeHeap();
                         }else if(opc==2){
                             //Eliminar
                             System.out.println("- - Eliminar clave :) - -\n");
-                            HeapBin.FunEliminar();
+                            HeapBin.FunEliminar(); // función de eliminar clave
                         }else if(opc==3){
                             //Mostrar
                             System.out.println("- - Mostrar heap :) - -\n");
-                            HeapBin.ImprimeHeap();
+                            HeapBin.ImprimeHeap(); // funcion que imprime el heap
+                        }else if(opc==4){
+                            //Extra: Buscar clave 
+                            System.out.println("- - Buscar clave :) - -\n");
+                            HeapBin.FunBuscar(); // función que busca la clave en el heap
                         }else {
                             //Regresar al menu principal
                             break;

@@ -115,13 +115,12 @@ public class Nodo {
         
     }
 
-    public int pedirValor(){
+    public int pedirValor(){ // Método que se utiliza para poder agregar los datos del nodo (utilizado en el heap)
         Scanner sc = new Scanner(System.in);
         int key;
         while(true){
             try{
                 key = Integer.parseInt(sc.nextLine());
-                
                 return key;
             }catch(Exception e){
                 System.err.println("Ingresa un número.");

@@ -39,32 +39,32 @@ public class Heap{
     }
      
      
-    private int Padre(int i){
+    private int Padre(int i){  // Se establecen las condiciones que debe de cumplir el nodo padre 
         return (i-1)/2;
     }
      
-    private int Hijo(int i,int k){
+    private int Hijo(int i,int k){ // Se establecen las condiciones que deben de cumplir los nodos hijos 
         return 2*i  +k;
     }
      
-    public void InsertarElem(int x){
+    public void InsertarElem(int x){ // Función en la que se debe insertar los elementos
         if(isFull())
-            throw new NoSuchElementException("No se pueden insertar más datos al heap, esta lleno :(");
+            throw new NoSuchElementException("No se pueden insertar más datos al heap, esta lleno :("); // En caso de que se exceda el límite
         heap[heapSize++] = x;
-        HeapifyArriba(heapSize-1);
+        HeapifyArriba(heapSize-1); //Se utiliza el heapify para hacer la magia del heap 
     }
      
-    private int Eliminar(int x){
+    private int Eliminar(int x){ // Función en la que se eliminan los elementos 
         if(isEmpty())
-            throw new NoSuchElementException("No puedes eliminar ningún elemento porque esta vacío :0");
+            throw new NoSuchElementException("No puedes eliminar ningún elemento porque esta vacío :0"); // En caso de que este vacío el arreglo de datos
         int key = heap[x];
         heap[x] = heap[heapSize -1];
         heapSize--;
-        HeapifyAbajo(x);
+        HeapifyAbajo(x); // Se utiliza para mantener el orden del heap y se revisa hacia abajo del heap 
         return key;
     }
  
-    private void HeapifyArriba(int i) {
+    private void HeapifyArriba(int i) { // Funcion que hace la magia del heap (mantiene las condiciones del heap en forma up)
         int temp = heap[i];
         while(i>0 && temp > heap[Padre(i)]){
             heap[i] = heap[Padre(i)];
@@ -73,15 +73,14 @@ public class Heap{
         heap[i] = temp;
     }
      
-    private void HeapifyAbajo(int i){
+    private void HeapifyAbajo(int i){ // Funcion que hace la magia del heap (mantiene las condiciones del heap en froma down)
         int child;
         int temp = heap[i];
         while(Hijo(i, 1) < heapSize){
             child = maxChild(i);
-            if(temp < heap[child]){ heap[i] = heap[child]; }else break; i = child; } heap[i] = temp; } private int maxChild(int i) { int leftChild = Hijo(i, 1); int rightChild = Hijo(i, 2);
-                return heap[leftChild]>heap[rightChild]?leftChild:rightChild;
+            if(temp < heap[child]){ heap[i] = heap[child]; }else break; i = child; } heap[i] = temp; } private int maxChild(int i) { int leftChild = Hijo(i, 1); int rightChild = Hijo(i, 2); return heap[leftChild]>heap[rightChild]?leftChild:rightChild;
     }
-     
+
     public void ImprimeHeap(){ //Imprime el heap
             System.out.print("nHeap = ");
             for (int i = 0; i < heapSize; i++)
@@ -89,13 +88,7 @@ public class Heap{
             System.out.println();
         }
     
-    /*private int EncuentraGrandulon(){ //Encuentra el valor máxímo del heap, en este caso es el primer elemento
-        if(isEmpty())
-            throw new NoSuchElementException("Heap is empty.");
-        return heap[0];
-    }*/
-
-    private int BusquedaClav(int VBuscado){
+    private int BusquedaClav(int VBuscado){ // Busco la clave proporcionada por el usuario para buscarlo en el arreglo de datos del heap (se utilizó Búsqueda Binaria y es un método auxiliar para el método Eliminar)
         int i;
         for (i=0;i<heap.length;i++){
             if(VBuscado==heap[i]){
@@ -105,7 +98,7 @@ public class Heap{
        return -1;
     }
       
-    public void FunEliminar(){
+    public void FunEliminar(){ // Es la función que se llamará en el main para poder eliminar la clave, 
         int clave,res;
         System.out.println("Ingresa la clave que deseas eliminar\n");
         System.out.print(">>> ");
@@ -113,19 +106,39 @@ public class Heap{
 
         res=BusquedaClav(clave);
 
-        if (res==-1){
+        if (res==-1){ // Si el resultado del método auxiliar regresa un -1 es que no se encuentra el elemento buscado en el arreglo
             System.out.println("Lo siento, la clave ingresada no existe o.o ");
         }else{
             
         System.out.println("Heap anterior: ");
         ImprimeHeap();
 
-        Eliminar(res);
+        Eliminar(res); //En caso de que sí se encuentre se elimina y se imprime el heap anterior y el actualizado al usuario para que revise los cambios correctamente 
         
         System.out.println("Heap actualizado: ");
         ImprimeHeap();
 
         System.out.println(" - -La clave ha sido eliminada con éxito ;) - -");
+        }
+    }
+
+    public void FunBuscar(){ // Se agregó un método extra para hacer la búsqueda de una clave en el heap
+        int temp;
+        int clave,res;
+        System.out.println("Ingresa la clave que deseas buscar\n");
+        System.out.print(">>> ");
+        clave=scan.nextInt();
+
+        res=BusquedaClav(clave);
+
+        if (res==-1){ 
+            System.out.println("Lo siento, la clave ingresada no existe o.o ");
+        }else{ 
+            //Se imprime la ubicación del nodo y el contenido del nodo 
+            System.out.println("La clave ingresada se encontró exitosamente :) ");
+            temp=heap[res];
+            System.out.println("la clave es : "+temp);
+            System.out.println("encontrada en el nodo : "+res);
         }
     }
      
