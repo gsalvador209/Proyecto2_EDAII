@@ -19,18 +19,18 @@ public class Main {
 
         Menu raiz = new Menu("Árbol AVL,Heap,Árbol de Expresión Aritmética,Salir");
         Menu avl = new Menu("Agregar clave,Buscar un valor,Eliminar Clave,Mostrar Árbol,Regresar");
-        Menu heap = new Menu("Agregar clave,Eliminar raíz,Mostrar Árbol,Regresar");
+        Menu heap = new Menu("Agregar clave,Eliminar raíz,Mostrar Árbol,Buscar clave,Regresar");
         Menu arit = new Menu("Ingresar expresión,Mostrar Árbol,Resolver,Regresar");
         
         //***********ÁRBOLES**********
         ArbolesArit exp = new ArbolesArit();
         ArbolAVL arbolAVL = new ArbolAVL();
-        
+        Heap HeapBin = new Heap(100);
         //***********AUXILIARES***********
         Scanner scan = new Scanner(System.in);
-      
         //**********CÓDIGO PRINCIPAL******
-        int opc;
+        int opc,temp;
+        Nodo nodo;
         String expresión = "";
         while(true){
             raiz.imprimirMenu();
@@ -89,21 +89,31 @@ public class Main {
                     break;
                 case 2:
                     //HEAP
+                    nodo = new Nodo();
                     while(true){
                         heap.imprimirMenu();
-                        opc = heap.solicitarOpcion("Primero debes crear el arbol", false, "1,4"); //TO-DO INGRESAR CONDICIÓN
+                        opc = heap.solicitarOpcion("Primero debes crear el arbol", true, "1,4"); //TO-DO INGRESAR CONDICIÓN
                                                                                                    //Por ejemplo root != null; 
                         if(opc== -1)
                             continue;
                         if(opc == 1){
                             //Agregar clave
-                            
+                            System.out.println("- - Agregar clave :) - -\n");
+                            System.out.println("Ingresa el nodo");
+                            temp=nodo.pedirValor(); // temp es la variable que almacena el valor ingresado del nodo 
+                            HeapBin.InsertarElem(temp);
                         }else if(opc==2){
                             //Eliminar
-                            
+                            System.out.println("- - Eliminar clave :) - -\n");
+                            HeapBin.FunEliminar(); // función de eliminar clave
                         }else if(opc==3){
-                            //Mostrar  
-                            
+                            //Mostrar
+                            System.out.println("- - Mostrar heap :) - -\n");
+                            HeapBin.ImprimeHeap(); // funcion que imprime el heap
+                        }else if(opc==4){
+                            //Extra: Buscar clave 
+                            System.out.println("- - Buscar clave :) - -\n");
+                            HeapBin.FunBuscar(); // función que busca la clave en el heap
                         }else {
                             //Regresar al menu principal
                             break;
